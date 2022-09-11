@@ -29,7 +29,7 @@ services:
     #build:
     #  context: ./
     #  dockerfile: Dockerfile
-    image: "cheatsheet:test"
+    image: "ajeep/cheatsheet:test"
     user: "node"
     depends_on:
       - mongo
@@ -38,11 +38,9 @@ services:
       dbURI: mongodb://root:example@mongo:27017/
       jwtSecret: "abcdefg"
     volumes:
-      - ./_env:/cheat-sheet-maker/.env
+      - ./_env:/app/.env
     ports:
-      - "5050:5000"
-    #env_file: ./docker/fqdn.env
-    #entrypoint: /mnt/openssl/create.sh
+      - "5055:5000"
     command: ["npm", "run", "start", "--production"]
     #command: ["npm", "run", "dev"]
 
