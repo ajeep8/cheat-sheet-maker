@@ -1,0 +1,50 @@
+version: '3.5'
+
+services:
+
+  mongo:
+    image: mongo:6.0
+    restart: always
+    #    ports:
+    #  - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - mongo-data:/data/db
+
+  mongo-express:
+    image: mongo-express
+    depends_on:
+      - mongo
+    restart: always
+    #ports:
+    #  - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+
+  cheatsheet:
+    #build:
+    #  context: ./
+    #  dockerfile: Dockerfile
+    image: "cheatsheet:test"
+    user: "node"
+    depends_on:
+      - mongo
+    restart: unless-stopped
+    environment:
+      dbURI: mongodb://root:example@mongo:27017/
+      jwtSecret: "abcdefg"
+    volumes:
+      - ./_env:/cheat-sheet-maker/.env
+    ports:
+      - "5050:5000"
+    #env_file: ./docker/fqdn.env
+    #entrypoint: /mnt/openssl/create.sh
+    command: ["npm", "run", "start", "--production"]
+    #command: ["npm", "run", "dev"]
+
+volumes:
+  mongo-data:
