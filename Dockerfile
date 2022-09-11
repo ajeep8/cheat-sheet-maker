@@ -12,7 +12,7 @@ RUN npm -v; npm install \
   # && chown -R node.node /cheat-sheet-maker
 
 COPY . /app
-COPY _env /app/.env
+#COPY _env /app/.env
 
 CMD [ "npm", "run", "dev" ]
 

@@ -1,0 +1,2 @@
+dbURI="mongodb://root:example@mongo:27017/"
+jwtSecret="abcdefg"
