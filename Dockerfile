@@ -8,7 +8,7 @@ COPY . .
 RUN npm -v; npm install \
   && cd client; npm install \
   && npm run build \
-  && rm -rf *.js *.json node_modules public src
+  && rm -rf *.js *.json node_modules public src /app/.git /app/.github /app/screenshots
   # && chown -R node.node /cheat-sheet-maker
 
 COPY . /app
