@@ -5,6 +5,7 @@ WORKDIR /app
 
 COPY . .
 
+#RUN npm -v; npm config set registry https://registry.npm.taobao.org; npm install \
 RUN npm -v; npm install \
   && cd client; npm install \
   && npm run build \
@@ -13,9 +14,11 @@ RUN npm -v; npm install \
 
 COPY . /app
 #COPY _env /app/.env
+CMD [ "npm", "run", "dev" ]
 
-#CMD [ "npm", "run", "dev" ]
-
-#FROM node:14-alpine AS cheatsheet_product
-#COPY --from=cheatsheet /cheat-sheet-maker /cheat-sheet-maker
+FROM node:14-alpine AS cheatsheet_product
+WORKDIR /app
+COPY --from=cheatsheet /app /app
 CMD [ "npm", "run", "start", "--production" ]
+
+
