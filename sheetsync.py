@@ -26,7 +26,7 @@ def sheet2md(sheet):
     f.close()
 
 def pull(mongoURL):
-    client = pymongo.MongoClient("mongodb://root:example@127.0.0.1:27017/")
+    client = pymongo.MongoClient(mongoURL)
     print(client.list_database_names())
     db = client.test
     col = db.sheets
@@ -83,7 +83,7 @@ def md2sheet(f):
     return metadata, cells
 
 def push(mongoURL):
-    client = pymongo.MongoClient("mongodb://root:example@127.0.0.1:27017/")
+    client = pymongo.MongoClient(mongoURL)
     #print(client.list_database_names())
     db = client.test
     col = db.sheets
