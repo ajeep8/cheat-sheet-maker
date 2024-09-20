@@ -6,8 +6,9 @@ WORKDIR /app
 COPY . .
 
 #RUN npm -v; npm config set registry https://registry.npm.taobao.org; npm install \
-RUN npm -v; npm install \
-  && cd client; npm install \
+#ENV https_proxy="http://ip:port"
+RUN apk add python3; npm -v; npm i \
+  && cd client; npm i \
   && npm run build \
   && rm -rf *.js *.json node_modules public src /app/.git /app/.github /app/screenshots
   # && chown -R node.node /cheat-sheet-maker

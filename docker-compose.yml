@@ -29,7 +29,7 @@ services:
     #build:
     #  context: ./
     #  dockerfile: Dockerfile
-    image: "ajeep/cheatsheet:test"
+    image: "cheatsheet:prod"
     user: "node"
     depends_on:
       - mongo
