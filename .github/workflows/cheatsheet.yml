@@ -67,6 +67,7 @@ jobs:
             file: ./Dockerfile
             push: true
             tags: ${{ secrets.DOCKERHUB_USERNAME }}/cheatsheet:test
+            platforms: linux/amd64,linux/arm64
           
         - name: Run the image in a container
           uses: addnab/docker-run-action@v3
